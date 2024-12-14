@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    color: #333;
+    --type-first: Helvetica, Arial, sans-serif;
+}
