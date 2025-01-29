@@ -1,7 +1,6 @@
 
 .header {
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1px);
-    padding: 0.5rem 0;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -13,30 +12,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 4rem;
 }
 
 .logo {
     padding: 0.5rem 0;
 }
 
-.button,
-.input {
-    display: block;
-    font-size: 1rem;
-    font-family: var(--type-first);
-    color: #333;
-}
-
-.a {
-    text-decoration: none;
-}
-
-.container {
-    max-width: 50px;
-    padding: 0 1rem;
-    margin: 0 auto;
-}
-
 .login {
     color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.login::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 17px;
+    background: url('../Assets/usuario.svg') no-repeat center center;
+    margin-left: .5rem;
+    position: relative;
+    top: -1px;
 }
