@@ -29,10 +29,10 @@ const useForm = (type: ValidationType | false) => {
             return true;
         }
 
-        if (types[type] && !types[type].regex.test(value)) {
-            setError(types[type].message);
-            return false;
-        }
+        // if (types[type] && !types[type].regex.test(value)) {
+        //     setError(types[type].message);
+        //     return false;
+        // }
 
         setError(null);
         return true;
