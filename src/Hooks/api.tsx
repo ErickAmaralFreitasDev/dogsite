@@ -1,8 +1,12 @@
-export const API_URL = 'https://www.dogsapi.origamid.dev';
+export const API_URL = 'http://dogsite.local/wp-json';
 
 interface apiProps {
     username: string;
     password: string;
+}
+
+interface propsApi {
+    token: string;
 }
 
 export function TOKEN_POST ({ username, password}: apiProps) {
@@ -14,6 +18,18 @@ export function TOKEN_POST ({ username, password}: apiProps) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({username, password}),
+        }
+    }
+}
+
+export function USER_GET ({token}:propsApi) {
+    return {
+        url: API_URL + '/api/user',
+        options: {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
         }
     }
 }
