@@ -3,43 +3,28 @@ import { Link } from "react-router-dom"
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import useForm from "../../Hooks/useForm";
-import { TOKEN_POST, USER_GET } from "../../Hooks/api";
+import { UserContext } from "../../UserContext";
 
 const LoginForm = () => {
   const username = useForm('username');
   const password = useForm(false);
+  const context = React.useContext(UserContext);
   
-  interface logForms {
-    token: string;
-  };
-
-  React.useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    if (token) {
-      getUser({ token: token });
-    }
-  }, []);
-
-  async function getUser({token}: logForms) {
-    const {url, options} = USER_GET({token});
-    const response = await fetch(url, options);
-    const json = await response.json(); 
-    console.log(json)
+  if (!context) {
+    throw new Error('useContext deve estar dentro do Provider');
   }
+
+  const { userLogin } = context;
+
+  // interface logForms {
+  //   token: string;
+  // };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if(username.validate() && password.validate()) {
-      const {url, options} = TOKEN_POST ({
-        username: username.value,
-        password: password.value,
-      });
-
-      const response = await fetch(url, options);
-      const json = await response.json();
-      await window.localStorage.setItem('token', json.token);
-      getUser(json.token);
+      userLogin(username.value, password.value)
       }
     }
 
