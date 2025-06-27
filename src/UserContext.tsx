@@ -1,5 +1,5 @@
 import React from 'react';
-import { TOKEN_POST, USER_GET } from './Hooks/api';
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from './Hooks/api';
 
 
 interface UserData {
@@ -17,6 +17,7 @@ interface UserContextType {
   error: string | null;
   userLogin: (username: string, password: string) => Promise<void>;
   getUser: (token: string) => Promise<void>;
+  userLogout: () => void;
 }
 
 export const UserContext = React.createContext<UserContextType | undefined>(undefined);
@@ -26,6 +27,26 @@ export const UserStorage = ({ children }: { children: React.ReactNode }) => {
     const [login, setLogin] = React.useState<boolean | null>(null);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
+
+    React.useEffect (() => {
+        async function autoLogin() {
+            const token = window.localStorage.getItem('token');
+            if (token) {
+                try {
+                    setError(null);
+                    setLoading(true);
+                    const { url, options} = TOKEN_VALIDATE_POST({ token });
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error('Token inválido');
+                    await getUser(token);
+                } catch (err) {
+                } finally {
+                    setLoading(false);
+                }
+            }
+        }
+        autoLogin();
+    }, []);
 
     async function getUser(token: string) {
         const {url, options} = USER_GET({token});
@@ -43,8 +64,16 @@ export const UserStorage = ({ children }: { children: React.ReactNode }) => {
         getUser(token);
     }
 
+    async function userLogout() {
+        setUser(null);
+        setLogin(false);
+        setError(null);
+        setLoading(false);
+        window.localStorage.removeItem('token');
+    }
+
     return (
-        <UserContext.Provider value={{ user, login, loading, error, userLogin, getUser }}>
+        <UserContext.Provider value={{ user, login, loading, error, userLogin, getUser, userLogout }}>
             {children}
         </UserContext.Provider>
     );
