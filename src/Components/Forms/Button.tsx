@@ -1,10 +1,11 @@
 import styles from './button.module.css';
+import React from "react";
 
-interface ButtonProps {
-    children: React.ReactNode;
-  }
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
 
-    function Button({ children, ...props }: ButtonProps) {
+    const Button = ({ children, ...props }: ButtonProps) => {
     return (
         <button {...props} className={styles.button}>
             {children}
