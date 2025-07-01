@@ -11,15 +11,18 @@
     box-sizing: border-box;
     transition: 0.2s;
     outline: none;
+    text-decoration: none;
 }
 
 .button:hover,
 .button:focus {
     outline: none;
     box-shadow: 0 0 0 2px #fea, 0 0 0 3px #fb1;
+    text-decoration: none;
 }
 
 .button:disabled {
     opacity: 0.5rem;
     cursor: wait;
+    text-decoration: none;
 }

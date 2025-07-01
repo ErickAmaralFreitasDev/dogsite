@@ -9,6 +9,10 @@ const types = {
     username: {
         regex: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 
         message: 'Usuário deve apresentar e-mail válido',
+    },
+    password: {
+        regex: /^.{6,12}$/,
+        message: 'A senha deve conter entre 6 e 12 caracteres',
     }
 }
 
