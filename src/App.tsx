@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Components/Login/Login.tsx';
 import './App.css'
 import { UserStorage } from './UserContext.tsx';
+import User from './Components/User/User.tsx';
+import ProtectedRouter from './Components/Helper/ProtectedRouter.tsx';
 
 const App = () => {
   return (
@@ -16,6 +18,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login/*" element={<Login />} />
+            <Route path="/conta/*" element={<ProtectedRouter><User /></ProtectedRouter>} />
           </Routes>
           <Footer />
         </UserStorage>

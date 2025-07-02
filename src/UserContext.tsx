@@ -87,6 +87,8 @@ export const UserStorage = ({ children }: { children: React.ReactNode }) => {
                 } finally {
                     setLoading(false);
                 }
+            } else {
+                setLogin(false);
             }
         }
         autoLogin();
