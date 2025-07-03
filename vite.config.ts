@@ -5,9 +5,12 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   plugins: [
     react(),
-    svgr()
-  ],
-  server: {
-    open: true
-  }
+    svgr({
+      // Opções do SVGR (opcional)
+      svgrOptions: {
+        icon: true, // Se você quer tratar os SVGs como ícones
+        // Outras opções podem ser adicionadas aqui
+      }
+    })
+  ]
 })
