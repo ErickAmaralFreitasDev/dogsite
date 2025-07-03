@@ -35,8 +35,7 @@ export const UserStorage = ({ children }: { children: React.ReactNode }) => {
         setError(null);
         setLoading(false);
         window.localStorage.removeItem('token');
-        navigate('/login');
-    }, [navigate]);
+    }, []);
 
     async function getUser(token: string) {
         const {url, options} = USER_GET({token});
