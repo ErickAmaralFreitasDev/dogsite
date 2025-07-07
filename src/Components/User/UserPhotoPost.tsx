@@ -7,11 +7,16 @@ import useFetch from "../../Hooks/useFetch";
 import { UserContext } from "../../UserContext";
 import { PHOTO_POST } from "../../Hooks/api";
 
+interface ImgState {
+  raw: File;
+  preview?: string;
+}
+
 const UserPhotoPost= () => {
     const nome = useForm('username');
     const peso = useForm(false); 
     const idade = useForm(false); 
-    const [img, setImg] = React.useState<File | null>(null);
+    const [img, setImg] = React.useState<ImgState | null>(null);
     const context = React.useContext(UserContext);
 
     if (!context) {
@@ -30,16 +35,23 @@ const UserPhotoPost= () => {
         formData.append('peso', peso.value);
         formData.append('idade', idade.value);
 
-        // const token = window.localStorage.getItem('token');
-        // const { url, options } = PHOTO_POST({ formData, token });
-        // request(url, options);
+        const token = window.localStorage.getItem('token');
+        if (!token) {
+            return;
+        }
+        const { url, options } = PHOTO_POST({ formData, token });
+        request(url, options);
     }
 
-    // function handleImgChange({target}) {
-    //     setImg({
-    //         raw: target.files[0],
-    //     });
-    // }
+    function handleImgChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const { files } = event.target;
+        if (files && files.length > 0) {
+            setImg({
+                raw: files[0],
+                preview: URL.createObjectURL(files[0])
+            });
+        }
+    }
 
     return (
         <section className={`${styles.photoPost} animeLeft`}>
