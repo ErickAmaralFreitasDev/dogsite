@@ -7,6 +7,7 @@ interface apiProps {
 
 interface propsApi {
     token: string;
+    formData?: FormData;
 }
 
 // interface userProps {
@@ -63,6 +64,19 @@ export function USER_POST ({ username, email, password }: { username: string, em
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, email, password }),
+        }
+    }
+}
+
+export function PHOTO_POST({ formData, token }: propsApi) {
+    return {
+        url: API_URL + '/api/photo',
+        options: {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+            body: formData
         }
     }
 }
