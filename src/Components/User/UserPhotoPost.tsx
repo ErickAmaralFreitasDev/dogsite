@@ -36,10 +36,9 @@ const UserPhotoPost= () => {
         formData.append('idade', idade.value);
 
         const token = window.localStorage.getItem('token');
-        if (!token) {
-            return;
-        }
+        if (!token) return;
         const { url, options } = PHOTO_POST({ formData, token });
+        console.log('Enviando:', { url, options, formData: Array.from(formData.entries()) });
         request(url, options);
     }
 
@@ -47,8 +46,8 @@ const UserPhotoPost= () => {
         const { files } = event.target;
         if (files && files.length > 0) {
             setImg({
-                raw: files[0],
-                preview: URL.createObjectURL(files[0])
+                preview: URL.createObjectURL(files[0]),
+                raw: files[0]
             });
         }
     }
@@ -56,12 +55,27 @@ const UserPhotoPost= () => {
     return (
         <section className={`${styles.photoPost} animeLeft`}>
             <form onSubmit={handleSubmit}>
-                <Input label='Nome' type="text" name='nome'/>
-                <Input label='Peso' type="text" name='peso'/>
-                <Input label='Idade' type="text" name='idade'/>
-                <input type='file' name='img' id='img' onChange={handleImgChange}/>
+                <Input label='Nome' type="text" name='nome' {...nome}/>
+                <Input label='Peso' type="number" name='peso' {...peso}/>
+                <Input label='Idade' type="number" name='idade' {...idade}/>
+                <input
+                    className={styles.file} 
+                    type='file' 
+                    name='img' 
+                    id='img' 
+                    onChange={handleImgChange}
+                />
                 <Button>Enviar</Button>
             </form>
+            <div>
+                {img && img.preview && (
+                    <div 
+                        className={styles.preview} 
+                        style={{backgroundImage: `url(${img.preview})`}}
+                    >
+                    </div>
+                )}
+            </div>
         </section>
     );
 };

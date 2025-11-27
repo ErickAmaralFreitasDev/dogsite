@@ -13,6 +13,10 @@ const types = {
     password: {
         regex: /^.{6,12}$/,
         message: 'A senha deve conter entre 6 e 12 caracteres',
+    },
+    number: {
+        regex: /^\d+$/,
+        message: 'Utilize números apenas'
     }
 }
 

@@ -51,9 +51,9 @@ const LoginForm = () => {
         <Errorp error={error ? { message: error } : undefined} />
         {/* {error && <p>{error}</p>} */}
       </form>
-      <Link className={LoginFormStyles.perdeu} to='/login/perdeu'>
+      {/* <Link className={LoginFormStyles.perdeu} to='/login/perdeu'>
         Perdeu a Senha?
-      </Link>
+      </Link> */}
       <div className={LoginFormStyles.cadastro}>
         <h2 className={LoginFormStyles.subtitulo}>Cadastro</h2>
         <p>Crie sua conta para acessar recursos exclusivos.</p>
