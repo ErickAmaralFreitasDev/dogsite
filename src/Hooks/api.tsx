@@ -6,8 +6,11 @@ interface apiProps {
 }
 
 interface propsApi {
-    token: string;
+    token?: string;
     formData?: FormData;
+    page?: number;
+    total?: number;
+    user?: number | string;
 }
 
 // interface userProps {
@@ -77,6 +80,26 @@ export function PHOTO_POST({ formData, token }: propsApi) {
                 Authorization: 'Bearer ' + token,
             },
             body: formData
+        }
+    }
+}
+
+export function PHOTOS_GET({ page = 1, total = 6, user = 0 }: propsApi) {
+    return {
+        url: API_URL + `/api/photo?_page=${page}&_total=${total}&_user=${user}`,
+        options: {
+            method: 'GET',
+            cache: 'no-store' as RequestCache,
+        }
+    }
+}
+
+export function PHOTO_GET({ id }: { id: number }) {
+    return {
+        url: API_URL + `/api/photo/${id}`,
+        options: {
+            method: 'GET',
+            cache: 'no-store' as RequestCache,
         }
     }
 }

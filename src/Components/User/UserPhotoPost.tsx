@@ -6,6 +6,8 @@ import useForm from "../../Hooks/useForm";
 import useFetch from "../../Hooks/useFetch";
 import { UserContext } from "../../UserContext";
 import { PHOTO_POST } from "../../Hooks/api";
+import { Errorp } from "../Helper/Errorp";
+import {useNavigate} from 'react-router-dom';
 
 interface ImgState {
   raw: File;
@@ -18,6 +20,7 @@ const UserPhotoPost= () => {
     const idade = useForm(false); 
     const [img, setImg] = React.useState<ImgState | null>(null);
     const context = React.useContext(UserContext);
+    const navigate = useNavigate();
 
     if (!context) {
         throw new Error('useContext deve estar dentro do Provider');
@@ -25,6 +28,12 @@ const UserPhotoPost= () => {
 
     const { userLogin } = context;
     const { user, error, loading, request } = useFetch<any>();
+
+    React.useEffect(() => {
+        if (user) {
+            navigate('/conta');
+        }
+    }, [user, navigate]);
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -65,7 +74,8 @@ const UserPhotoPost= () => {
                     id='img' 
                     onChange={handleImgChange}
                 />
-                <Button>Enviar</Button>
+                {loading ? <Button disabled>Enviando...</Button> : <Button>Enviar</Button>}
+                <Errorp error={error ? { message: error } : undefined} />
             </form>
             <div>
                 {img && img.preview && (

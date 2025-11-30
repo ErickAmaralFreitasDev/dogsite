@@ -53,7 +53,7 @@ const UserHeader = () => {
                     <AdicionarIcon />
                     {mobile && <span>Postar Foto</span>}
                 </NavLink>
-                <button onClick={userLogout}>
+                <button onClick={handleLogout}>
                     <SairIcon />
                     {mobile && <span>Sair</span>}
                 </button>
