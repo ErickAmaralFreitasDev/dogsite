@@ -25,9 +25,10 @@ interface PhotoContentData {
 
 interface FeedModalProps {
   photo: Photo;
+  setModalPhoto: React.Dispatch<React.SetStateAction<Photo | null>>;
 }
 
-const FeedModal: React.FC<FeedModalProps> = ({ photo }) => {
+const FeedModal: React.FC<FeedModalProps> = ({ photo, setModalPhoto }) => {
     const {user, loading, error, request} = useFetch<PhotoContentData>();
 
     React.useEffect(() => {
@@ -35,8 +36,14 @@ const FeedModal: React.FC<FeedModalProps> = ({ photo }) => {
         request(url, options);
     }, [request, photo]);
 
+    function handleOutsideClick(event: React.MouseEvent<HTMLDivElement>) {
+        if (event.target === event.currentTarget) {
+            setModalPhoto(null);
+        }
+    }
+
     return( 
-    <div className={styles.modal}>
+    <div className={styles.modal} onClick={handleOutsideClick}>
         {error && <Errorp error={{ message: error }} />}
         {loading && <Loading/>}
         {/* <img src={photo.src} alt={photo.title} /> */}
