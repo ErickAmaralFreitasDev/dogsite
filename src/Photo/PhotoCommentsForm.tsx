@@ -2,6 +2,8 @@ import React from "react";
 import Enviar from "../Assets/Enviar";
 import useFetch from "../Hooks/useFetch";
 import { COMMENT_POST } from "../Hooks/api";
+import { Errorp } from "../Components/Helper/Errorp";
+import styles from "./PhotoCommentsForm.module.css";
 
 interface ApiComment {
   comment_ID: number | string;
@@ -60,11 +62,9 @@ const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({
       
       const { response, json } = await request(url, options);
       
-      // Tipar a resposta
       const responseData = json as CommentResponse;
       
       if (response && response.ok) {
-        // Formato do comentário retornado pela API
         const newComment: ApiComment = {
           comment_ID: responseData.comment_ID || responseData.id || Date.now(),
           comment_content: responseData.comment_content || responseData.comment || comment,
@@ -72,10 +72,8 @@ const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({
           comment_date: responseData.comment_date || responseData.date || new Date().toISOString()
         };
         
-        // Limpa o campo
         setComment('');
         
-        // Chama o callback para atualizar a lista
         onCommentAdded(newComment);
       }
     } catch (err) {
@@ -84,18 +82,20 @@ const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-        <h3>Comentários ({comments.length})</h3>
+    <form className={styles.form} onSubmit={handleSubmit}>
+        {/* <h3>Comentários ({comments.length})</h3> */}
         <textarea
+            className={styles.textarea}
             id='comment'
             name="comment" 
             placeholder="Comente ..."
             value={comment} 
             onChange={({target}) => setComment(target.value)}
         />
-        <button>
+        <button className={styles.button}>
             <Enviar />
         </button>
+        <Errorp error={error ? { message: error } : undefined} />
     </form>
   );
 };

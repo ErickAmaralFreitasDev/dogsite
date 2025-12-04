@@ -20,12 +20,19 @@ interface PhotoCommentsProps {
 const PhotoComments: React.FC<PhotoCommentsProps> = ({ id, comments, onCommentAdded }) => {
   const context = React.useContext(UserContext);
   const [localComments, setLocalComments] = React.useState<ApiComment[]>(comments);
+  const commentSection = React.useRef<HTMLUListElement>(null);
   
   if (!context) {
     throw new Error('UserContext deve estar dentro do Provider');
   }
 
   const { login } = context;
+
+  React.useEffect(() => {
+    if (commentSection.current) {
+      commentSection.current.scrollTop = commentSection.current.scrollHeight
+    }
+    }, [localComments]);
 
   React.useEffect(() => {
     setLocalComments(comments);
@@ -40,8 +47,8 @@ const PhotoComments: React.FC<PhotoCommentsProps> = ({ id, comments, onCommentAd
 
   return (
     <>
-      <ul className={styles.comments}>
-        {comments.map(comment => (
+      <ul ref={commentSection} className={styles.comments}>
+        {localComments.map(comment => (
           <li key={comment.comment_ID}>
             <b>{comment.comment_author}</b>: 
             <span>{comment.comment_content}</span>

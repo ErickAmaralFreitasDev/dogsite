@@ -33,7 +33,7 @@ const Enviar: React.FC<DogSvgIconProps> = ({
         d="M15.0003 16C15.0003 17.1046 14.1049 18 13.0003 18C11.8957 18 11.0003 17.1046 11.0003 16C11.0003 14.8955 11.8957 14 13.0003 14C14.1049 14 15.0003 14.8955 15.0003 16Z"
         fill={fill}
       />
-      <g className="latir">
+      <g>
         <path
           fillRule="evenodd"
           clipRule="evenodd"

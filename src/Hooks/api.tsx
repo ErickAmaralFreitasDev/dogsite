@@ -122,3 +122,17 @@ export function COMMENT_POST({ id, body, token }: {
         },
     }
 }
+
+export function PHOTO_DELETE({ id, token }: { 
+    id: number; 
+    token: string 
+    }) {
+    return {
+        url: API_URL + `/api/photo/${id}`,
+        options: {
+            method: 'DELETE',
+            headers: {
+            Authorization: 'Bearer ' + token,
+        }},
+    }
+}

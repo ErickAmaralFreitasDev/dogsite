@@ -4,6 +4,8 @@ import styles from "./PhotoContent.module.css";
 import { Link } from "react-router-dom";
 import PhotoComments from "./PhotoComments";
 import VisualizacaoIcon from "./VisualizacaoIcon";
+import { UserContext } from "../UserContext";
+import PhotoDelete from "./PhotoDelete";
 
 interface PhotoData {
   id: number;
@@ -27,7 +29,9 @@ interface PhotoContentProps {
 }
 
 const PhotoContent: React.FC<PhotoContentProps> = ({ user }) => {
+    const context = React.useContext(UserContext);
     const {photo, comments} = user;
+    const isPhotoOwner = context?.user?.username === photo.author;
 
     return <div className={styles.photo}>
         <div className={styles.img}>
@@ -36,6 +40,7 @@ const PhotoContent: React.FC<PhotoContentProps> = ({ user }) => {
         <div className={styles.details}>
             <div>
                 <p className={styles.author}>
+                    {isPhotoOwner && <PhotoDelete id={photo.id} />}
                     <Link to={`/perfil/${user.photo.author}`}>@{user.photo.author}</Link>
                     <span className={styles.visualizacoes}>                        
                         <VisualizacaoIcon 
