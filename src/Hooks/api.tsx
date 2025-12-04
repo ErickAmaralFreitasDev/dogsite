@@ -103,3 +103,22 @@ export function PHOTO_GET({ id }: { id: number }) {
         }
     }
 }
+
+
+export function COMMENT_POST({ id, body, token }: { 
+    id: number; 
+    body: { comment: string }; 
+    token: string 
+    }) {
+    return {
+        url: API_URL + `/api/comment/${id}`,
+        options: {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(body),
+        },
+    }
+}
