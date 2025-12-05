@@ -1,4 +1,5 @@
 import Feed from './Feed/Feed'
+import { Loading } from './Helper/Loading'
 import styles from './Home.module.css'
 
 const Home = () => {
