@@ -6,6 +6,7 @@ import PhotoComments from "./PhotoComments";
 import VisualizacaoIcon from "./VisualizacaoIcon";
 import { UserContext } from "../UserContext";
 import PhotoDelete from "./PhotoDelete";
+import Image from "../Components/Helper/Image";
 
 interface PhotoData {
   id: number;
@@ -35,7 +36,7 @@ const PhotoContent: React.FC<PhotoContentProps> = ({ user }) => {
 
     return <div className={styles.photo}>
         <div className={styles.img}>
-            <img src={user.photo.src} alt={user.photo.title} />
+            <Image src={photo.src} alt={photo.title}/>
         </div>
         <div className={styles.details}>
             <div>
