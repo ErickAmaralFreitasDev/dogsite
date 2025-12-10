@@ -14,13 +14,17 @@ interface Photo {
   total_comments: number;
 }
 
+interface FeedProps {
+  userId?: number;
+}
 
-const Feed = () => {
+const Feed: React.FC<FeedProps> = ({ userId }) => {
+    console.log('🔍 Feed recebeu userId:', userId);
     const [modalPhoto, setModalPhoto] = React.useState<Photo | null>(null);
 
     return <div>
         {modalPhoto && <FeedModal photo={modalPhoto} setModalPhoto={setModalPhoto} />}
-        <FeedPhotos setModalPhoto={setModalPhoto} />
+        <FeedPhotos userId={userId} setModalPhoto={setModalPhoto} />
     </div>;
 };
 

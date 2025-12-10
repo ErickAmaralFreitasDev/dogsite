@@ -21,7 +21,7 @@ interface PhotoContentData {
 
 interface FeedPhotosItemProps {
   photo: Photo;
-  user: PhotoContentData;
+  // user: PhotoContentData;
   setModalPhoto: React.Dispatch<React.SetStateAction<Photo | null>>;
 }
 
