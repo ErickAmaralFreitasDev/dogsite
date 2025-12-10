@@ -29,6 +29,10 @@
   word-break: break-word;
 }
 
+.single.comments {
+  padding: 0px;
+}
+
 .comment {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #eee;

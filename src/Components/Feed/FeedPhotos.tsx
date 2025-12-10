@@ -20,27 +20,31 @@ interface Photo {
 
 interface FeedPhotosProps {
   setModalPhoto: React.Dispatch<React.SetStateAction<Photo | null>>
-  userId?: number; 
+  userId?: number;
+  page?: number;
+  setInfinite: React.Dispatch<React.SetStateAction<boolean>>; 
 }
 
-const FeedPhotos: React.FC<FeedPhotosProps> = ({ userId, setModalPhoto }) => {
+const FeedPhotos: React.FC<FeedPhotosProps> = ({ userId, page, setModalPhoto, setInfinite }) => {
 
     const { user: photos, loading, error, request } = useFetch<Photo[]>();
 
     React.useEffect(() => {
         async function fetchPhotos() {
+            const total = 6;
             const {url, options} = PHOTOS_GET({
-                page: 1, 
+                page, 
                 total: 6, 
                 user: userId || 0 
             });
-            console.log('🔍 FeedPhotos - URL chamada:', url);
-            console.log('🔍 FeedPhotos - userId:', userId);
-            const {json} = await request(url, options);
+            const {response, json} = await request(url, options);
+            if (response && response.ok && json.length < total) {
+                setInfinite(false);
+            }
             console.log(json);
         }
         fetchPhotos();
-    }, [request, userId]);
+    }, [request, userId, page, setInfinite]);
 
     if (error) return <Errorp error={{ message: error }}/>
     if (loading) return <Loading/>;

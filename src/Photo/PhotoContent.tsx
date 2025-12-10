@@ -26,15 +26,16 @@ interface PhotoContentData {
 }
 
 interface PhotoContentProps {
-  user: PhotoContentData; 
+  user: PhotoContentData;
+  single?: boolean; 
 }
 
-const PhotoContent: React.FC<PhotoContentProps> = ({ user }) => {
+const PhotoContent: React.FC<PhotoContentProps> = ({ user, single }) => {
     const context = React.useContext(UserContext);
     const {photo, comments} = user;
     const isPhotoOwner = context?.user?.username === photo.author;
 
-    return <div className={styles.photo}>
+    return <div className={`${styles.photo} ${single ? styles.single : ''}`}>
         <div className={styles.img}>
             <Image src={photo.src} alt={photo.title}/>
         </div>
@@ -63,7 +64,7 @@ const PhotoContent: React.FC<PhotoContentProps> = ({ user }) => {
                 </ul>
             </div>
         </div>
-        <PhotoComments id={user.photo.id} comments={comments} />
+        <PhotoComments id={user.photo.id} single={single} comments={comments} />
     </div>;
 }
 

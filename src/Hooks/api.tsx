@@ -11,6 +11,7 @@ interface propsApi {
     page?: number;
     total?: number;
     user?: number | string;
+    id?: number;
 }
 
 // interface userProps {

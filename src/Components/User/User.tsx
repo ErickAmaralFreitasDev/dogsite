@@ -10,9 +10,6 @@ const User = () => {
 
     const context = React.useContext(UserContext);
     const { user } = context!;
-
-    console.log('🔍 User - user.id:', user?.id);
-    console.log('🔍 User - passando para Feed:', user?.id);
     
     return <section className='container'>
         <UserHeader />

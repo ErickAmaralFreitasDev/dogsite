@@ -27,13 +27,15 @@ interface CommentResponse {
 interface PhotoCommentsFormProps {
   id: number;
   comments: ApiComment[];
-  onCommentAdded: (newComment: ApiComment) => void; 
+  onCommentAdded: (newComment: ApiComment) => void;
+  single?: boolean; 
 }
 
 const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({ 
   id, 
   comments, 
-  onCommentAdded  
+  onCommentAdded,
+  single  
 }) => {
   const [comment, setComment] = React.useState('');
   const { request, error, loading } = useFetch();
@@ -82,7 +84,7 @@ const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.form}  ${single ? styles.single : ''}`} onSubmit={handleSubmit}>
         {/* <h3>Comentários ({comments.length})</h3> */}
         <textarea
             className={styles.textarea}

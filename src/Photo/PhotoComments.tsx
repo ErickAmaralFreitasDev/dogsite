@@ -15,9 +15,10 @@ interface PhotoCommentsProps {
   id: number;
   comments: ApiComment[];
   onCommentAdded?: (newComment: ApiComment) => void;
+  single?: boolean;
 }
 
-const PhotoComments: React.FC<PhotoCommentsProps> = ({ id, comments, onCommentAdded }) => {
+const PhotoComments: React.FC<PhotoCommentsProps> = ({ id, comments, onCommentAdded, single }) => {
   const context = React.useContext(UserContext);
   const [localComments, setLocalComments] = React.useState<ApiComment[]>(comments);
   const commentSection = React.useRef<HTMLUListElement>(null);
@@ -47,14 +48,14 @@ const PhotoComments: React.FC<PhotoCommentsProps> = ({ id, comments, onCommentAd
 
   return (
     <>
-      <ul ref={commentSection} className={styles.comments}>
+      <ul ref={commentSection} className={`${styles.comments} ${single ? styles.single : ''}`}>
         {localComments.map(comment => (
           <li key={comment.comment_ID}>
             <b>{comment.comment_author}</b>: 
             <span>{comment.comment_content}</span>
-          </li>))}
+          </li>))}                              
       </ul>
-      {login && <PhotoCommentsForm id={id} comments={localComments} onCommentAdded={handleNewComment}  />}
+      {login && <PhotoCommentsForm id={id} comments={localComments} single={single} onCommentAdded={handleNewComment}  />}
     </>
   );
 };

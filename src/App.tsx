@@ -8,6 +8,7 @@ import './App.css'
 import { UserStorage } from './UserContext.tsx';
 import User from './Components/User/User.tsx';
 import ProtectedRouter from './Components/Helper/ProtectedRouter.tsx';
+import Photo from './Photo/Photo.tsx';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login/*" element={<Login />} />
             <Route path="/conta/*" element={<ProtectedRouter><User /></ProtectedRouter>} />
+            <Route path="foto/:id*" element={<Photo />} />
           </Routes>
           <Footer />
         </UserStorage>
