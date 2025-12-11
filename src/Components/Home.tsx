@@ -1,10 +1,18 @@
-import styles from './Home.module.css'
+import Head from './Helper/Head'
+import FeedPublic from './Feed/FeedPublic';
 
-const Home = () => {
+interface HeadProps
+ {
+    title: string;
+    description?: string;
+}
+
+const Home: React.FC<HeadProps> = () => {
   return (
-    <div>
-      Home
-    </div>
+    <section className='container mainContainer'>
+      <Head title='Fotos' description='Home do site Dogs'/>
+      <FeedPublic/>
+    </section>
   )
 }
 

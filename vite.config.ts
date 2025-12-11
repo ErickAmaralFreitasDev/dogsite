@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import svgr from 'vite-plugin-svgr'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    svgr({
+      // Opções do SVGR (opcional)
+      svgrOptions: {
+        icon: true, // Se você quer tratar os SVGs como ícones
+        // Outras opções podem ser adicionadas aqui
+      }
+    })
+  ]
 })

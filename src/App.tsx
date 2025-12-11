@@ -5,16 +5,32 @@ import Home from './Components/Home.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Components/Login/Login.tsx';
 import './App.css'
+import { UserStorage } from './UserContext.tsx';
+import User from './Components/User/User.tsx';
+import ProtectedRouter from './Components/Helper/ProtectedRouter.tsx';
+import Photo from './Photo/Photo.tsx';
+import UserProfile from './Components/User/UserProfile.tsx';
+import NotFound from './Components/NotFound.tsx';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      <Footer />
+    <div className='App'>
+      <BrowserRouter>
+        <UserStorage>
+          <Header />
+            <main className='AppBody'>
+              <Routes>
+                <Route path="/" element={<Home title='Fotos' />} />
+                <Route path="/login/*" element={<Login />} />
+                <Route path="/conta/*" element={<ProtectedRouter><User /></ProtectedRouter>} />
+                <Route path="foto/:id" element={<Photo />} />
+                <Route path="perfil/:user" element={<UserProfile />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          <Footer />
+        </UserStorage>
+      </BrowserRouter>
     </div>
   );
 };
