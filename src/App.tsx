@@ -9,6 +9,8 @@ import { UserStorage } from './UserContext.tsx';
 import User from './Components/User/User.tsx';
 import ProtectedRouter from './Components/Helper/ProtectedRouter.tsx';
 import Photo from './Photo/Photo.tsx';
+import UserProfile from './Components/User/UserProfile.tsx';
+import NotFound from './Components/NotFound.tsx';
 
 const App = () => {
   return (
@@ -20,7 +22,9 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login/*" element={<Login />} />
             <Route path="/conta/*" element={<ProtectedRouter><User /></ProtectedRouter>} />
-            <Route path="foto/:id*" element={<Photo />} />
+            <Route path="foto/:id" element={<Photo />} />
+            <Route path="perfil/:user" element={<UserProfile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </UserStorage>
