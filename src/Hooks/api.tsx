@@ -105,6 +105,16 @@ export function PHOTO_GET({ id }: { id: number }) {
     }
 }
 
+export function ALLPHOTOS_GET({ page = 1, total = 6 }: { page?: number, total?: number }) {
+    return {
+        url: API_URL + `/api/photo?_page=${page}&_total=${total}`,
+        options: {
+            method: 'GET',
+            cache: 'no-store' as RequestCache,
+        }
+    }
+}
+
 
 export function COMMENT_POST({ id, body, token }: { 
     id: number; 
