@@ -5,6 +5,7 @@ import { PHOTO_GET } from "../Hooks/api";
 import { Errorp } from "../Components/Helper/Errorp";
 import { Loading } from "../Components/Helper/Loading";
 import PhotoContent from "./PhotoContent";
+import Head from "../Components/Helper/Head";
 
 interface PhotoApiResponse {
   photo: {
@@ -34,7 +35,10 @@ const Photo = () => {
     if (loading) return <Loading/>;
     if (user)
     return (
-        <section className="container mainContainer">   
+        <section className="container mainContainer">
+        <Head
+            title={user.photo.title}
+        />   
             <PhotoContent single={true} user={user}/>
         </section>);
     else return null;

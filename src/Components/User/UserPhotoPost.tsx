@@ -8,6 +8,7 @@ import { UserContext } from "../../UserContext";
 import { PHOTO_POST } from "../../Hooks/api";
 import { Errorp } from "../Helper/Errorp";
 import {useNavigate} from 'react-router-dom';
+import Head from '../Helper/Head';
 
 interface ImgState {
   raw: File;
@@ -63,6 +64,9 @@ const UserPhotoPost= () => {
 
     return (
         <section className={`${styles.photoPost} animeLeft`}>
+            <Head
+                title='Posting'
+            />
             <form onSubmit={handleSubmit}>
                 <Input label='Nome' type="text" name='nome' {...nome}/>
                 <Input label='Peso' type="number" name='peso' {...peso}/>

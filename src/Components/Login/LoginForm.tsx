@@ -7,6 +7,7 @@ import { UserContext } from "../../UserContext";
 import { Errorp } from "../Helper/Errorp";
 import LoginFormStyles from './LoginForm.module.css';
 import stylesBtn from '../Forms/button.module.css';
+import Head from "../Helper/Head";
 
 const LoginForm = () => {
   const username = useForm('username');
@@ -19,10 +20,6 @@ const LoginForm = () => {
 
   const { userLogin, error, loading } = context;
 
-  // interface logForms {
-  //   token: string;
-  // };
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -33,6 +30,9 @@ const LoginForm = () => {
 
   return (
     <section className='animeLeft'>
+      <Head
+        title='Login'
+      />
       <h1 className='title'>Login</h1>
       <form className={LoginFormStyles.form} onSubmit={handleSubmit}>
         <Input 
@@ -49,11 +49,7 @@ const LoginForm = () => {
         />
         {loading ? <Button disabled>Carregando...</Button> : <Button>Entrar</Button>}
         <Errorp error={error ? { message: error } : undefined} />
-        {/* {error && <p>{error}</p>} */}
       </form>
-      {/* <Link className={LoginFormStyles.perdeu} to='/login/perdeu'>
-        Perdeu a Senha?
-      </Link> */}
       <div className={LoginFormStyles.cadastro}>
         <h2 className={LoginFormStyles.subtitulo}>Cadastro</h2>
         <p>Crie sua conta para acessar recursos exclusivos.</p>
