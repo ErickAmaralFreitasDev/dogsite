@@ -12,7 +12,7 @@ const Carregando: React.FC<DogIconProps> = ({
   className = "",
   width = 46,
   height = 31,
-  fill = "#333",
+//   fill = "#333",
 }) => {
   
   const [step, setStep] = React.useState(3);

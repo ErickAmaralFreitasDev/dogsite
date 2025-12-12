@@ -11,7 +11,7 @@ const Header = () => {
     throw new Error('Header must be used within a UserStorage');
   }
 
-  const { user, userLogout } = context;
+  const { user } = context;
 
   return (
     <header className={styles.header}>

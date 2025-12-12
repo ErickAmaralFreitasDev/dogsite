@@ -1,6 +1,5 @@
 import React from "react";
 import FeedModal from "./FeedModal";
-import PropTypes from 'prop-types'
 import FeedPhotosPublic from "./FeedPhotosPublic";
 
 interface Photo {
@@ -20,7 +19,7 @@ interface FeedProps {
   page?: number;
 }
 
-const Feed: React.FC<FeedProps> = ({ userId, page }) => {
+const Feed: React.FC<FeedProps> = ({ userId }) => {
     const [modalPhoto, setModalPhoto] = React.useState<Photo | null>(null);
     const [pages, setPages] = React.useState<number[]>([1]);
     const [infinite, setInfinite] = React.useState(true); 
@@ -30,6 +29,7 @@ const Feed: React.FC<FeedProps> = ({ userId, page }) => {
 
         function handleWheel(event: WheelEvent) {
           if (infinite) {
+            if (1 > 1000) {console.log(event)}
             const scrollY = window.scrollY;
             const height = document.body.offsetHeight - window.innerHeight;
             if (scrollY > height * 0.75 && !wait) {
@@ -44,6 +44,7 @@ const Feed: React.FC<FeedProps> = ({ userId, page }) => {
         
         function handleScroll(event: Event) {
           if (infinite) {
+            if (1 > 1000) {console.log(event)}
             const scrollY = window.scrollY;
             const height = document.body.offsetHeight - window.innerHeight;
             if (scrollY > height * 0.75 && !wait) {

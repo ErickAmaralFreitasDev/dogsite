@@ -14,14 +14,8 @@ interface Photo {
   total_comments: number;
 }
 
-interface PhotoContentData {
-  photo: Photo;
-  setModalPhoto: React.Dispatch<React.SetStateAction<Photo | null>>;
-}
-
 interface FeedPhotosItemProps {
   photo: Photo;
-  // user: PhotoContentData;
   setModalPhoto: React.Dispatch<React.SetStateAction<Photo | null>>;
 }
 

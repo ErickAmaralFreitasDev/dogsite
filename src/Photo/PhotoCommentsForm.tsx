@@ -33,12 +33,11 @@ interface PhotoCommentsFormProps {
 
 const PhotoCommentsForm: React.FC<PhotoCommentsFormProps> = ({ 
   id, 
-  comments, 
   onCommentAdded,
   single  
 }) => {
   const [comment, setComment] = React.useState('');
-  const { request, error, loading } = useFetch();
+  const { request, error } = useFetch();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

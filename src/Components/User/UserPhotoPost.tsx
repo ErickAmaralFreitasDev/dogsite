@@ -27,7 +27,7 @@ const UserPhotoPost= () => {
         throw new Error('useContext deve estar dentro do Provider');
     }
 
-    const { userLogin } = context;
+    // const { userLogin } = context;
     const { user, error, loading, request } = useFetch<any>();
 
     React.useEffect(() => {

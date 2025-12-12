@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Loading.module.css";
 import Carregando from "../../Assets/Carregando";
 

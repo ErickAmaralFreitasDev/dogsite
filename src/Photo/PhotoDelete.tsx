@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./PhotoDelete.module.css";
 import { PHOTO_DELETE } from "../Hooks/api";
-import useFetch from "../Hooks/useFetch";
 
 interface PhotoDeleteProps {
   id: number;
   onDelete?: () => void;
 }
 
-const PhotoDelete: React.FC<PhotoDeleteProps> = ({ id, onDelete }) => {
+const PhotoDelete: React.FC<PhotoDeleteProps> = ({ id }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
