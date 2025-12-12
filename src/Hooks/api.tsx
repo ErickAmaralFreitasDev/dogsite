@@ -147,3 +147,16 @@ export function PHOTO_DELETE({ id, token }: {
         }},
     }
 }
+
+export function GET_STATS({ token }: { 
+    token: string 
+    }) {
+    return {
+        url: API_URL + `/api/stats`,
+        options: {
+            method: 'GET',
+            headers: {
+            Authorization: 'Bearer ' + token,
+        }},
+    }
+}

@@ -41,7 +41,12 @@ export const UserStorage = ({ children }: { children: React.ReactNode }) => {
         const {url, options} = USER_GET({token});
         const response = await fetch(url, options);
         const json = await response.json();
-        setUser(json);
+        const userWithToken = {
+            ...json,
+            token: token
+        };
+        
+        setUser(userWithToken);
         setLogin(true);
     }
 
