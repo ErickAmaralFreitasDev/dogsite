@@ -5,13 +5,15 @@ import { GET_STATS } from "../../Hooks/api";
 import { UserContext } from "../../UserContext";
 import { Loading } from "../Helper/Loading";
 import { Errorp } from "../Helper/Errorp";
-import UserStatsGraphs from "./UserStatsGraphs";
+// import UserStatsGraphs from "./UserStatsGraphs";
 
 interface PhotoWithAccess {
   id: number;
   title: string;
   acessos: string; 
 }
+
+const UserStatsGraphs = React.lazy(() => import('./UserStatsGraphs'))
 
 const UserStats = () => {
 
@@ -38,12 +40,14 @@ const UserStats = () => {
     if (error) return <Errorp />
     if (photosArray && Array.isArray(photosArray)) {
         console.log('✅ UserStats - Array de fotos recebido:', photosArray.length, 'fotos');
-    return <div>
-        <Head
-            title='Estatísticas'
-        />
-        <UserStatsGraphs user={photosArray}/>
-    </div>;
+    return (
+        <React.Suspense fallback={<div></div>}>
+            <Head
+                title='Estatísticas'
+            />
+            <UserStatsGraphs user={photosArray}/>
+        </React.Suspense>
+    );
     }
     else return null;
 };
